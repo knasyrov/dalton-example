@@ -14,8 +14,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-
-    if @item.save(item_params) 
+    if @item.save
       render json: { id: @item.id }
     else
       render json: @item.errors, status: :unprocessable_entity
@@ -44,6 +43,6 @@ class ItemsController < ApplicationController
     end
 
     def item_params
-      params.permit!
+      params.require(:item).permit!
     end    
 end

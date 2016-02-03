@@ -11,7 +11,7 @@
     return
 
   $scope.submit = ->
-    $scope.item.put().then (id)-> 
+    Restangular.one("items", $scope.id).customPUT(item: $scope.item.plain()).then (id)->
       $location.path('/items')
       growl.success 'Элемент успешно обновлен'
     return
