@@ -1,0 +1,23 @@
+.row
+  .col-md-6
+    .panel.panel-default
+      .panel-body
+        %form.form-horizontal{role: 'form', ng: {submit: 'submit()' }}
+          %legend
+            Описание
+          .form-group
+            %label.control-label.col-sm-2{for: 'name'} Name
+            .col-sm-10    
+              %input.form-control.input-sm{type: 'text', name: 'name', ng: {model: 'item.name'} }
+          .form-group{ng: {repeat: '(key, description) in schema'}}
+            %label.control-label.col-sm-2{for: '{{ key }}' } {{ key | capitalize }}
+            .col-sm-10
+              %input.form-control.input-sm{type: '{{ description.type }}', name: '{{ key }}', ng: {if: "_.contains(['text', 'number'], description.type)", model: "item[key]" }  }
+              %select.form-control.input-sm{ng: {if: "description.type == 'select'", model: "item[key]"}}
+                %option{ng: {repeat: 'option in description.options' }} {{ option }} 
+          .form-group
+            .col-sm-offset-2.col-sm-10
+              %button.btn.btn-primary.btn-sm(type='submit') Сохранить
+              %a.btn.btn-default.btn-sm(href='/#/items') Назад
+
+    {{ item.schema }}

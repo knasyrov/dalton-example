@@ -1,0 +1,22 @@
+.row
+  .col-md-12
+    %a.btn.btn-default.btn-sm(href='/#/') На главную
+    %a.btn.btn-primary.btn-sm(href='/#/items/new') Добавить
+.row
+  .col-md-8
+    %table.table.table-striped.table-condensed.table-hover
+      %caption Элементы
+      %thead
+        %tr
+          %th #
+          %th Name
+          %th{ng: {repeat: '(key, description) in schema'}} {{ key | capitalize }}
+          %th
+      %tbody
+        %tr{ng: {repeat: 'item in items'}}
+          %td {{ item.id }}
+          %td {{ item.name }}
+          %td{ng: {repeat: '(key, description) in schema'}} {{ item[key] }}
+          %td
+            %a.btn.btn-default.btn-xs{href: '/#/items/{{item.id}}/edit'} редактировать
+            %button.btn.btn-danger.btn-xs{ng: { click: 'destroyItem(item)' }} удалить
