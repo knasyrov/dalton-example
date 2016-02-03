@@ -6,7 +6,7 @@
 
   init = ->
     $scope.id = $routeParams.item_id;
-    $scope.base = Restangular.one("items", $scope.id).get().then (item)-> 
+    Restangular.one("items", $scope.id).get().then (item)-> 
       $scope.item = item
     return
 

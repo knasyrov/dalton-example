@@ -10,8 +10,7 @@
     return
 
   $scope.submit = ->
-    base = Restangular.all('items')
-    base.post($scope.item).then (id)->
+    Restangular.all('items').post($scope.item).then (id)->
       $location.path('/items')
       growl.success 'Элемент успешно сохранен'      
     return
